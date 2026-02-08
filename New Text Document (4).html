@@ -1,0 +1,1791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ansh Verma | Cybersecurity Portfolio</title>
+    
+    <link rel="icon" type="image/gif" href="https://media.tenor.com/FMTaWoHYgdkAAAAC/dedsec.gif">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* STRICT MONOCHROME PALETTE */
+            --primary-white: #ffffff;
+            --secondary-white: #e0e0e0;
+            --accent-white: #ffffff;
+            --dark-bg: #0d0d0d;
+            --darker-bg: #000000;
+            --grid-color: rgba(255, 255, 255, 0.05);
+            --gray: #333333;
+            --light-gray: #999999;
+            --mid-gray: #666666;
+        }
+
+        body {
+            font-family: 'Share Tech Mono', monospace;
+            background: var(--darker-bg);
+            color: #fff;
+            overflow: hidden;
+            height: 100vh;
+            position: fixed;
+            width: 100%;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Entry Screen */
+        .entry-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: var(--darker-bg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            transition: opacity 0.5s ease;
+        }
+
+        .entry-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* TYPING EFFECT TITLE */
+        .entry-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 72px;
+            font-weight: 900;
+            letter-spacing: 8px;
+            color: #ffffff;
+            text-shadow: 0 0 10px #ffffff, 0 0 20px #aaaaaa;
+            margin-bottom: 20px;
+            border-right: 5px solid white; /* The cursor */
+            padding-right: 10px;
+            animation: blinkCursor 0.75s step-end infinite;
+            white-space: nowrap;
+            overflow: hidden;
+            max-width: 100%;
+        }
+
+        @keyframes blinkCursor {
+            from, to { border-color: transparent }
+            50% { border-color: white; }
+        }
+
+        .entry-subtitle {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 16px;
+            color: var(--light-gray);
+            letter-spacing: 3px;
+            margin-bottom: 60px;
+            text-transform: uppercase;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .press-start-btn {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 20px;
+            color: var(--light-gray);
+            border: 3px solid var(--light-gray);
+            padding: 20px 40px;
+            background: transparent;
+            cursor: pointer;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            opacity: 0;
+        }
+
+        .press-start-btn.visible {
+            opacity: 1;
+            animation: pressStartBlink 1.5s infinite;
+        }
+
+        @keyframes pressStartBlink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .press-start-btn:hover {
+            color: var(--darker-bg);
+            background: var(--primary-white);
+            border-color: var(--primary-white);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+            animation: none;
+        }
+
+        .entry-footer {
+            position: absolute;
+            bottom: 30px;
+            font-size: 12px;
+            color: var(--mid-gray);
+            font-family: 'Share Tech Mono', monospace;
+        }
+
+        /* UPDATED SKULL CORNER CSS */
+        .skull-corner {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            width: 150px; /* Adjusted size for the GIF */
+            height: auto;
+            opacity: 0.9;
+            z-index: 10001;
+        }
+        
+        .skull-corner img {
+            width: 100%;
+            height: auto;
+            display: block;
+            /* Keeps it strictly black and white. Remove 'filter' if you want color. */
+            filter: grayscale(100%) contrast(1.2);
+        }
+
+        /* Mobile adjustments for entry screen */
+        @media (max-width: 640px) {
+            .entry-title {
+                font-size: 32px;
+                letter-spacing: 4px;
+            }
+
+            .entry-subtitle {
+                font-size: 12px;
+                text-align: center;
+                padding: 0 20px;
+            }
+
+            .press-start-btn {
+                font-size: 16px;
+                padding: 15px 30px;
+            }
+
+            .skull-corner {
+                width: 100px;
+                bottom: 15px;
+                right: 15px;
+            }
+        }
+
+        /* Animated grid background */
+        .grid-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(var(--grid-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 40px 40px;
+            animation: gridMove 25s linear infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(50px); }
+        }
+
+        /* Scanline effect */
+        .scanline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                transparent 0%,
+                rgba(255, 255, 255, 0.01) 50%,
+                transparent 100%
+            );
+            background-size: 100% 3px;
+            animation: scan 10s linear infinite;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        @keyframes scan {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+
+        /* Floating cyberpunk elements */
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .cyber-icon {
+            position: absolute;
+            font-size: 40px;
+            opacity: 0.03;
+            color: var(--primary-white);
+            animation: float 20s infinite;
+        }
+
+        .cyber-icon:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
+        .cyber-icon:nth-child(2) { left: 80%; top: 30%; animation-delay: 2s; }
+        .cyber-icon:nth-child(3) { left: 15%; top: 70%; animation-delay: 4s; }
+        .cyber-icon:nth-child(4) { left: 70%; top: 60%; animation-delay: 6s; }
+        .cyber-icon:nth-child(5) { left: 50%; top: 50%; animation-delay: 8s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-20px) rotate(5deg); }
+            50% { transform: translateY(0) rotate(0deg); }
+            75% { transform: translateY(20px) rotate(-5deg); }
+        }
+
+        /* Main container */
+        .container {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            height: 100vh;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        /* Left panel - Visual */
+        .visual-panel {
+            flex: 0 0 350px;
+            background: rgba(13, 13, 13, 0.9);
+            border: 2px solid var(--primary-white);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .avatar-container {
+            width: 100%;
+            aspect-ratio: 1;
+            background: #000000;
+            border: 3px solid var(--primary-white);
+            box-shadow: 0 0 40px rgba(255, 255, 255, 0.3), inset 0 0 40px rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            line-height: 1.2;
+            color: var(--primary-white);
+            padding: 25px;
+        }
+
+        .avatar-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, transparent 40%, rgba(0, 0, 0, 0.8) 100%);
+            pointer-events: none;
+        }
+
+        .ascii-skull {
+            white-space: pre;
+            text-align: center;
+            font-weight: bold;
+            text-shadow: 0 0 10px var(--primary-white), 0 0 20px var(--primary-white);
+            z-index: 1;
+            animation: glitchSkull 5s infinite;
+            letter-spacing: 0;
+        }
+
+        @keyframes glitchSkull {
+            0%, 90%, 100% { 
+                transform: translate(0);
+                filter: brightness(1);
+            }
+            92% { 
+                transform: translate(-2px, 2px);
+                filter: brightness(1.3);
+            }
+            94% { 
+                transform: translate(2px, -2px);
+                filter: brightness(0.8);
+            }
+            96% { 
+                transform: translate(-1px, -1px);
+                filter: brightness(1.2);
+            }
+        }
+
+        .profile-info {
+            text-align: center;
+        }
+
+        .profile-info h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 28px;
+            color: var(--accent-white);
+            text-shadow: 0 0 10px var(--primary-white);
+            margin-bottom: 10px;
+        }
+
+        .profile-info .title {
+            color: var(--light-gray);
+            font-size: 14px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .stat-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--mid-gray);
+            padding: 15px;
+            text-align: center;
+        }
+
+        .stat-box .number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 24px;
+            color: var(--primary-white);
+            text-shadow: 0 0 10px var(--primary-white);
+        }
+
+        .stat-box .label {
+            font-size: 11px;
+            color: var(--light-gray);
+            margin-top: 5px;
+            text-transform: uppercase;
+        }
+
+        .quick-links {
+            margin-top: 20px;
+        }
+
+        .quick-link {
+            display: block;
+            padding: 10px;
+            margin-bottom: 8px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--mid-gray);
+            color: var(--primary-white);
+            text-decoration: none;
+            text-align: center;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+
+        .quick-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+            border-color: var(--primary-white);
+        }
+
+        .resume-download {
+            background: rgba(255, 255, 255, 0.08);
+            border: 2px solid var(--primary-white);
+            font-weight: bold;
+        }
+
+        .resume-download:hover {
+            background: var(--primary-white);
+            color: var(--darker-bg);
+        }
+
+        /* Terminal Panel */
+        .terminal-panel {
+            flex: 1;
+            background: rgba(0, 0, 0, 0.95);
+            border: 2px solid var(--primary-white);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .terminal-header {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--mid-gray);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        @media (max-width: 640px) {
+            .terminal-header {
+                padding: 12px 15px;
+            }
+        }
+
+        .terminal-title {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary-white);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .terminal-controls {
+            display: flex;
+            gap: 8px;
+        }
+
+        .terminal-btn {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 1px solid;
+        }
+
+        .terminal-btn.close { background: #ffffff; border-color: #ffffff; box-shadow: 0 0 10px #ffffff; }
+        .terminal-btn.minimize { background: #999999; border-color: #999999; box-shadow: 0 0 10px #999999; }
+        .terminal-btn.maximize { background: #666666; border-color: #666666; box-shadow: 0 0 10px #666666; }
+
+        .terminal-body {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            font-size: 14px;
+            line-height: 1.6;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .terminal-body::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .terminal-body::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .terminal-body::-webkit-scrollbar-thumb {
+            background: var(--mid-gray);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        .terminal-line {
+            margin-bottom: 8px;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .prompt {
+            color: var(--light-gray);
+            margin-right: 10px;
+        }
+
+        .command {
+            color: var(--accent-white);
+        }
+
+        .output {
+            color: var(--light-gray);
+            margin-left: 20px;
+        }
+
+        .error {
+            color: #ff3333;
+            margin-left: 20px;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 8px;
+            height: 16px;
+            background: var(--primary-white);
+            margin-left: 5px;
+            animation: blink 1s infinite;
+        }
+
+        /* Command input */
+        .command-input {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: var(--accent-white);
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 14px;
+            width: 100%;
+            caret-color: var(--primary-white);
+        }
+
+        .command-input::placeholder {
+            color: var(--mid-gray);
+            opacity: 0.5;
+        }
+
+        .command-input::selection {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Loading animation - blinking smiley */
+        .loading-smiley {
+            display: inline-block;
+            margin-left: 5px;
+            animation: blinkSmiley 0.8s infinite;
+        }
+
+        @keyframes blinkSmiley {
+            0%, 49% { 
+                opacity: 1;
+            }
+            50%, 99% { 
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* Folder/File system */
+        .item {
+            display: inline-block;
+            padding: 8px 16px;
+            margin: 5px 5px 5px 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--mid-gray);
+            color: var(--accent-white);
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--primary-white);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+            transform: translateX(5px);
+        }
+
+        .folder {
+            color: var(--accent-white);
+            border-color: var(--light-gray);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .folder:hover {
+            background: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        }
+
+        .file {
+            color: var(--light-gray);
+            border-color: var(--gray);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .file:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--light-gray);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+        }
+
+        /* Touch-friendly for mobile */
+        @media (hover: none) {
+            .item {
+                padding: 12px 20px;
+                margin: 8px 0;
+            }
+
+            .folder, .file {
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+            }
+        }
+
+        .file-content {
+            margin: 20px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--mid-gray);
+            color: var(--light-gray);
+            line-height: 1.8;
+        }
+
+        @media (max-width: 640px) {
+            .file-content {
+                margin: 15px 0;
+                padding: 15px;
+                font-size: 14px;
+            }
+
+            .file-content h3 {
+                font-size: 18px;
+            }
+        }
+
+        .file-content h3 {
+            color: var(--accent-white);
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 15px;
+            font-size: 20px;
+            text-shadow: 0 0 10px var(--primary-white);
+        }
+
+        .file-content .meta {
+            color: var(--light-gray);
+            font-size: 12px;
+            margin-bottom: 15px;
+        }
+
+        .file-content .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .tag {
+            padding: 4px 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--mid-gray);
+            color: var(--primary-white);
+            font-size: 11px;
+            text-transform: uppercase;
+        }
+
+        /* Help menu */
+        .help-menu {
+            margin: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--mid-gray);
+        }
+
+        .help-menu .command-list {
+            margin-top: 10px;
+        }
+
+        .help-menu .cmd {
+            color: var(--accent-white);
+            font-weight: bold;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 968px) {
+            .container {
+                flex-direction: column;
+                padding: 10px;
+                gap: 10px;
+                height: 100vh;
+                overflow: hidden;
+            }
+
+            .visual-panel {
+                flex: 0 0 auto;
+                order: 2;
+                padding: 20px;
+                max-height: 40vh;
+            }
+
+            .terminal-panel {
+                order: 1;
+                flex: 1;
+                min-height: 0;
+            }
+
+            .avatar-container {
+                max-width: 180px;
+                margin: 0 auto;
+                font-size: 11px;
+                line-height: 1.15;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+
+            .stat-box {
+                padding: 10px;
+            }
+
+            .profile-info h1 {
+                font-size: 22px;
+            }
+
+            .profile-info .title {
+                font-size: 12px;
+            }
+
+            .terminal-title {
+                font-size: 11px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            body {
+                overflow: auto;
+                height: auto;
+                position: relative;
+            }
+
+            .container {
+                height: auto;
+                min-height: 100vh;
+                overflow: visible;
+                padding: 0;
+            }
+
+            .visual-panel {
+                display: none;
+            }
+
+            .terminal-panel {
+                min-height: 100vh;
+                height: auto;
+                border: none;
+            }
+
+            .terminal-header {
+                padding: 12px 15px;
+            }
+
+            .terminal-body {
+                font-size: 13px;
+                padding: 15px;
+                overflow-y: visible;
+                height: auto;
+            }
+
+            .item {
+                display: block;
+                margin: 8px 0;
+                padding: 12px;
+            }
+
+            .file-content {
+                margin: 15px 0;
+                padding: 15px;
+                font-size: 13px;
+            }
+
+            /* Mobile prompt improvements */
+            .prompt {
+                font-size: 13px;
+                display: block;
+                margin-bottom: 8px;
+            }
+
+            .command-input {
+                font-size: 16px !important;
+                padding: 10px 0;
+                width: 100%;
+            }
+
+            .command-input::placeholder {
+                font-size: 13px;
+            }
+
+            /* Better folder/file display on mobile */
+            .folder, .file {
+                display: block !important;
+                width: 100%;
+                margin: 10px 0 !important;
+                padding: 14px !important;
+                font-size: 15px;
+                text-align: center;
+            }
+
+            /* Stack command buttons in a grid on mobile */
+            .command-buttons-container {
+                display: grid !important;
+                grid-template-columns: 1fr 1fr;
+                gap: 10px !important;
+                margin-top: 12px !important;
+                width: 100%;
+            }
+
+            /* Mobile-specific button styling */
+            .command-btn {
+                margin: 0 !important;
+                padding: 14px 10px !important;
+                font-size: 14px !important;
+                text-align: center;
+                min-height: 48px;
+                display: flex !important;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+
+        /* Tablet landscape */
+        @media (min-width: 641px) and (max-width: 968px) and (orientation: landscape) {
+            .visual-panel {
+                display: flex;
+                max-height: 50vh;
+            }
+
+            .terminal-panel {
+                flex: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="entry-screen" id="entryScreen">
+        
+        <h1 class="entry-title"></h1>
+        
+        <p class="entry-subtitle">The Portfolio where tech meets DETERMINATION</p>
+        
+        <button class="press-start-btn" id="startBtn">[ PRESS START ]</button>
+        
+        <div class="entry-footer">
+            (c) 2026 Ansh Verma | v1.0.0
+        </div>
+        
+        <div class="skull-corner">
+            <img src="https://c.tenor.com/y1pNuAHiHFcAAAAd/tenor.gif" alt="DedSec GIF">
+        </div>
+    </div>
+
+    <div class="grid-background"></div>
+    <div class="scanline"></div>
+    
+    <div class="floating-elements">
+        <div class="cyber-icon">⚡</div>
+        <div class="cyber-icon">🔷</div>
+        <div class="cyber-icon">⬡</div>
+        <div class="cyber-icon">◈</div>
+        <div class="cyber-icon">▲</div>
+    </div>
+
+    <div class="container">
+        <div class="visual-panel">
+            <div class="avatar-container">
+                <div class="ascii-skull">⠀⠀⠀⠀⠀⣶⡆⠀⠀⠀⢀⣴⢦⠀⠀⠀⠀⣖⡶⠀⠀⠀⠀⡏⡧⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⢹⣷⡀⠀⠀⢀⣿⣧⡀⠀⠀⢠⣾⣧⠀⠀⠀⣠⣾⡇⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⢸⣿⣿⣦⡀⣼⣿⣿⣷⡀⢠⣿⣿⣿⡆⢀⣾⣿⣿⡇⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣷⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⠋⠙⢿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠠⣤⣉⣙⠛⠛⠛⠿⠿⠁⣴⣦⡈⠻⠛⠛⠛⢛⣉⣁⡤⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠈⠉⠛⠻⠿⠶⣶⣆⠈⢿⡿⠃⣠⣶⡿⠿⠟⠛⠉⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⢠⣿⣿⣶⣶⣤⣤⣤⣤⡀⢁⣠⣤⣤⣤⣶⣶⣿⣿⡀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⣸⣿⡏⠉⠙⠛⠿⢿⣿⣿⣾⣿⡿⠿⠛⠋⠉⠹⣿⡇⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠻⢿⣧⣀⠀⠀⣀⣀⣼⡿⣿⣯⣀⣀⠀⠀⣀⣼⡿⠗⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠙⠻⣿⣿⣿⣿⣿⠁⠘⣿⣿⣿⣿⣿⠟⠉⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⣿⣿⣿⣇⣀⣀⣹⣿⣿⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⣿⠿⣿⡿⢿⣿⠿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⡇⢀⣿⡇⢸⣿⡀⢸⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠁⠈⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</div>
+            </div>
+            
+            <div class="profile-info">
+                <h1>ANSH VERMA</h1>
+                <div class="title">Cybersecurity Specialist</div>
+                <p style="font-size: 12px; color: rgba(255, 255, 255, 0.6); line-height: 1.6;">
+                    Third-year B.Tech student specializing in Cybersecurity. Focused on penetration testing, SOC operations, and security research.
+                </p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="number">3+</div>
+                    <div class="label">Projects</div>
+                </div>
+                <div class="stat-box">
+                    <div class="number">3</div>
+                    <div class="label">Internships</div>
+                </div>
+                <div class="stat-box">
+                    <div class="number">5+</div>
+                    <div class="label">Awards</div>
+                </div>
+                <div class="stat-box">
+                    <div class="number">7.82</div>
+                    <div class="label">CGPA</div>
+                </div>
+            </div>
+
+            <div class="quick-links">
+                <a href="mailto:anshmeet226@gmail.com" class="quick-link">📧 Email</a>
+                <a href="https://github.com/Diabos" class="quick-link" target="_blank">💻 GitHub</a>
+                <a href="https://www.linkedin.com/in/anshverma226/" class="quick-link" target="_blank">💼 LinkedIn</a>
+                <a href="#" id="resumeDownloadBtn" class="quick-link resume-download">📄 Resume</a>
+            </div>
+        </div>
+
+        <div class="terminal-panel">
+            <div class="terminal-header">
+                <div class="terminal-title">ansh@terminal:~$</div>
+                <div class="terminal-controls">
+                    <div class="terminal-btn close"></div>
+                    <div class="terminal-btn minimize"></div>
+                    <div class="terminal-btn maximize"></div>
+                </div>
+            </div>
+            <div class="terminal-body" id="terminal">
+                </div>
+        </div>
+    </div>
+
+    <script>
+        const terminal = document.getElementById('terminal');
+        let currentPath = '~';
+        let commandHistory = [];
+
+        // File system structure
+        const fileSystem = {
+            '~': {
+                type: 'directory',
+                contents: {
+                    'projects': { type: 'directory', contents: {} },
+                    'experience': { type: 'directory', contents: {} },
+                    'education': { type: 'directory', contents: {} },
+                    'certifications': { type: 'directory', contents: {} },
+                    'achievements': { type: 'directory', contents: {} },
+                    'skills': { type: 'directory', contents: {} },
+                    'about.txt': { type: 'file', content: 'about' }
+                }
+            },
+            '~/projects': {
+                type: 'directory',
+                contents: {
+                    'disaster-drone.md': { type: 'file', content: 'project1' },
+                    'phishing-analyzer.md': { type: 'file', content: 'project2' },
+                    'blockchain-supply.md': { type: 'file', content: 'project3' }
+                }
+            },
+            '~/experience': {
+                type: 'directory',
+                contents: {
+                    'secureitlabs-2025.txt': { type: 'file', content: 'exp1' },
+                    'simpra-tech-2025.txt': { type: 'file', content: 'exp2' },
+                    'opal-marketing-2024.txt': { type: 'file', content: 'exp3' }
+                }
+            },
+            '~/education': {
+                type: 'directory',
+                contents: {
+                    'northcap-university.txt': { type: 'file', content: 'edu1' },
+                    'high-school.txt': { type: 'file', content: 'edu2' }
+                }
+            },
+            '~/certifications': {
+                type: 'directory',
+                contents: {
+                    'database-foundations.txt': { type: 'file', content: 'cert1' },
+                    'aws-cloud-foundations.txt': { type: 'file', content: 'cert2' },
+                    'threatops-challenge.txt': { type: 'file', content: 'cert3' },
+                    'google-cybersecurity.txt': { type: 'file', content: 'cert4' }
+                }
+            },
+            '~/achievements': {
+                type: 'directory',
+                contents: {
+                    'vc-fund-award.txt': { type: 'file', content: 'achievement1' },
+                    'flexible-electronics.txt': { type: 'file', content: 'achievement2' },
+                    'blockchain-research.txt': { type: 'file', content: 'achievement3' }
+                }
+            },
+            '~/skills': {
+                type: 'directory',
+                contents: {
+                    'technical-skills.txt': { type: 'file', content: 'skills1' },
+                    'cybersecurity-tools.txt': { type: 'file', content: 'skills2' }
+                }
+            }
+        };
+
+        // File contents
+        const fileContents = {
+            'about': {
+                title: 'About Ansh Verma',
+                meta: 'Cybersecurity Specialist | The NorthCap University',
+                content: `Third-year B.Tech student in Computer Science and Engineering with a focus on Cybersecurity and a minor in CMOS VLSI & RTL. 
+
+Drawn to the space where security meets hardware, whether it's digging into system loopholes or pushing circuits to work smarter. Always looking for challenges that demand both creativity and technical depth.
+
+Currently expanding skills through hands-on industry experience and open to future opportunities that allow me to apply and deepen security expertise.`,
+                tags: ['Cybersecurity', 'Penetration Testing', 'SOC', 'Forensics', 'Hardware Security']
+            },
+            'project1': {
+                title: 'Disaster Management Drone',
+                meta: 'AI • Robotics • Thermal Imaging • Ongoing',
+                content: `Developing an advanced disaster management drone for real-time aerial surveillance, thermal imaging, and AI-based object detection to aid emergency response.
+
+Key Highlights:
+• Selected for the NIDAR competition
+• Awarded ₹2,10,000 funding by the Vice Chancellor of The NorthCap University
+• Collaborating with a multidisciplinary team on robotics, AI, and aeronautical engineering
+• Implementing real-time surveillance and emergency response capabilities
+• Integrating thermal imaging and AI-based object detection systems
+
+This project combines cutting-edge technology with real-world impact to save lives during disasters.`,
+                tags: ['Drone Tech', 'AI', 'Computer Vision', 'Robotics', 'Emergency Response']
+            },
+            'project2': {
+                title: 'Azure-Powered Phishing Email Analyzer',
+                meta: 'Azure AI • Security • Dashboard • 2025',
+                content: `Built a local web dashboard using Azure AI Language (Text Analytics) to analyze phishing emails.
+
+Features:
+• Generates comprehensive risk scores and verdicts
+• Identifies key signals: suspicious phrases, sentiment analysis
+• Extracts entities and flags malicious URLs
+• Analyzes sender reputation and email patterns
+• Real-time threat assessment dashboard
+
+Helps users identify and avoid phishing attacks through intelligent email analysis powered by Azure AI.`,
+                tags: ['Azure', 'AI', 'Security', 'Phishing Detection', 'Text Analytics']
+            },
+            'project3': {
+                title: 'Blockchain Framework for Supply Chains',
+                meta: 'Research Paper • Blockchain • Security',
+                content: `Authored a research paper titled "A Secure and Reliable Blockchain Framework for Cyber-Physical Medicine Supply Chains"
+
+Research Focus:
+• Developing secure blockchain solutions for pharmaceutical supply chains
+• Ensuring authenticity and traceability of medicines
+• Preventing counterfeit drugs through cyber-physical systems
+• Implementing smart contracts for automated verification
+• Enhancing transparency in the medical supply chain
+
+This research addresses critical security challenges in healthcare logistics.`,
+                tags: ['Blockchain', 'Healthcare', 'Supply Chain', 'Research', 'Security']
+            },
+            'exp1': {
+                title: 'Cyber Security Associate Intern',
+                meta: 'SecureITlabs | Bahrain • Nov 2025 - Present',
+                content: `Currently working as a Cyber Security Associate Intern focusing on SOC operations and security testing.
+
+Responsibilities:
+• Authored security SOPs and operational documentation to streamline processes
+• Enhanced consistency across security workflows
+• Conducted log analysis and SOC monitoring using Wazuh and Zabbix
+• Identified, validated, and escalated security events
+• Performed mobile and web application penetration testing
+• Aligned testing with industry standards to identify vulnerabilities
+
+Working on real-world security challenges in a professional SOC environment.`,
+                tags: ['SOC', 'Wazuh', 'Zabbix', 'Penetration Testing', 'Security Operations']
+            },
+            'exp2': {
+                title: 'Cybersecurity Intern',
+                meta: 'Simpra Advanced Technology LLC | Muscat, Oman • Jun 2025 - Aug 2025',
+                content: `Conducted comprehensive security assessments on web applications, networks, and infrastructure.
+
+Key Achievements:
+• Performed penetration testing using Burp Suite, Nmap, Nikto, WPScan, and Hydra
+• Executed security testing to identify SQL injection, XSS, and authentication flaws
+• Configured Aruba access points and switches for secure deployment
+• Documented findings with detailed remediation recommendations
+• Strengthened overall security posture of client systems
+
+Gained hands-on experience with enterprise-level security tools and methodologies.`,
+                tags: ['Penetration Testing', 'Burp Suite', 'Network Security', 'Vulnerability Assessment', 'Aruba']
+            },
+            'exp3': {
+                title: 'IT Infrastructure Intern',
+                meta: 'Opal Marketing and Industry | Muscat, Oman • Jun 2024 - Jul 2024',
+                content: `Gained practical experience in IT operations and security practices.
+
+Experience:
+• Installed and maintained secure hardware, servers, and CCTV systems
+• Provided troubleshooting and network support to reduce downtime
+• Learned hardware security implementation
+• Worked on physical security infrastructure
+• Developed understanding of IT operations in industrial environment
+
+Foundation-building internship that sparked interest in cybersecurity.`,
+                tags: ['IT Operations', 'Hardware Security', 'Network Support', 'CCTV Systems', 'Troubleshooting']
+            },
+            'edu1': {
+                title: 'B.Tech in Computer Science & Engineering',
+                meta: 'The NorthCap University, Gurugram • 2023-2027',
+                content: `Specialization: Cyber Security
+Minor: CMOS VLSI & RTL
+CGPA: 7.82
+
+Focus Areas:
+• Advanced Cybersecurity concepts and techniques
+• Web & Mobile Penetration Testing
+• Security Operations Center (SOC) operations
+• Digital Forensics and Incident Response
+• Hardware security and VLSI design
+
+Positions of Responsibility:
+• Vice President of International Relations Office
+• Coordinator of Career Services and Alumni Relations`,
+                tags: ['Computer Science', 'Cybersecurity', 'VLSI', 'RTL Design', 'University']
+            },
+            'edu2': {
+                title: 'High School Education',
+                meta: 'Indian School Al Maabela, Oman',
+                content: `Class X (2020): 81%
+Class XII (2023): 69%
+
+Completed secondary education in Oman before pursuing higher education in India.
+
+Built foundation in sciences and mathematics that led to pursuing Computer Science and Cybersecurity.`,
+                tags: ['High School', 'CBSE', 'Oman', 'Education']
+            },
+            'cert1': {
+                title: 'Database Foundations',
+                meta: 'Oracle Academy • 2025',
+                content: `Completed Oracle Academy's Database Foundations certification.
+
+Covered:
+• Database design principles
+• SQL fundamentals
+• Data modeling concepts
+• Database management systems
+• Query optimization
+
+Essential knowledge for secure database implementation and management.`,
+                tags: ['Oracle', 'Database', 'SQL', 'Certification']
+            },
+            'cert2': {
+                title: 'AWS Academy Cloud Foundations',
+                meta: 'Amazon Web Services • 2023',
+                content: `Completed AWS Academy Cloud Foundations certification.
+
+Topics Covered:
+• Cloud computing concepts
+• AWS core services
+• Security and compliance in cloud
+• Cloud architecture best practices
+• Cost optimization strategies
+
+Foundation for cloud security and infrastructure knowledge.`,
+                tags: ['AWS', 'Cloud Computing', 'Certification']
+            },
+            'cert3': {
+                title: 'ThreatOps Challenge',
+                meta: 'SentinelOne • 2025',
+                content: `Completed SentinelOne's ThreatOps Challenge.
+
+Practical experience with:
+• Threat detection and response
+• Security operations workflows
+• Endpoint protection strategies
+• Incident investigation techniques
+• Real-world threat scenarios
+
+Hands-on training in modern cybersecurity operations.`,
+                tags: ['SentinelOne', 'Threat Detection', 'SOC', 'EDR', 'Certification']
+            },
+            'cert4': {
+                title: 'Foundations of Cyber Security',
+                meta: 'Google • 2024',
+                content: `Completed Google's Foundations of Cyber Security certification.
+
+Core Topics:
+• Security principles and frameworks
+• Threat landscape overview
+• Security tools and technologies
+• Risk management fundamentals
+• Security best practices
+
+Solid foundation in cybersecurity principles from Google.`,
+                tags: ['Google', 'Cybersecurity', 'Security Foundations', 'Certification']
+            },
+            'skills1': {
+                title: 'Technical Skills',
+                meta: 'Programming & Technologies',
+                content: `Programming Languages:
+• Java - Object-oriented programming and application development
+• HTML - Web development and structure
+
+Database Management:
+• MySQL - Relational database design and queries
+• MongoDB - NoSQL database implementation
+
+Soft Skills:
+• Problem-Solving & Logical Thinking
+• Communication & Team Collaboration
+• Documentation and Technical Writing
+• Project Management`,
+                tags: ['Java', 'HTML', 'MySQL', 'MongoDB', 'Problem Solving']
+            },
+            'skills2': {
+                title: 'Cybersecurity Tools & Expertise',
+                meta: 'Security Arsenal',
+                content: `Core Concepts:
+• Web & Mobile Penetration Testing
+• SOC Operations and Monitoring
+• Digital Forensics and Analysis
+
+Security Tools:
+• Linux - Primary security testing platform
+• Wazuh - SIEM and log analysis
+• MOBSF - Mobile security testing
+• Nmap - Network scanning and enumeration
+• Nikto - Web vulnerability scanner
+• Nessus - Vulnerability assessment
+• Burp Suite - Web application testing
+• Metasploit - Exploitation framework
+• OllyDbg & Ghidra - Reverse engineering
+• Cobalt Strike & Zabbix - Advanced operations
+• Android Studio & ADB - Mobile analysis
+• Data Encryption - Cryptographic implementations`,
+                tags: ['Linux', 'Burp Suite', 'Metasploit', 'Nmap', 'Wazuh', 'Penetration Testing']
+            },
+            'achievement1': {
+                title: '💰 VC Fund Award - ₹2,10,000',
+                meta: 'The NorthCap University • 2025',
+                content: `Awarded a Vice Chancellor Fund of ₹2,10,000 for the Disaster Management Drone project.
+
+Recognition Details:
+• Selected from multiple competing projects
+• Funded by the Vice Chancellor of The NorthCap University
+• Project selected for NIDAR competition
+• Funding supports development of advanced drone technology
+• Demonstrates innovation in disaster response solutions
+
+This prestigious award validates the project's potential impact and technical merit.`,
+                tags: ['Funding', 'NIDAR', 'Innovation', 'Drone Tech', 'Award']
+            },
+            'achievement2': {
+                title: '📊 IEI Faridabad Summit Presentation',
+                meta: 'Institution of Engineers India • 2025',
+                content: `Presented abstract on "Flexible Electronics: Real-World Applications" at the IEI Faridabad Summit, 2025.
+
+Presentation Highlights:
+• Selected to present at prestigious engineering summit
+• Topic: Flexible Electronics and their practical applications
+• Demonstrated expertise in emerging technologies
+• Engaged with industry professionals and academics
+• Showcased research and technical knowledge
+
+Platform to share insights on cutting-edge electronics technology.`,
+                tags: ['IEI', 'Presentation', 'Flexible Electronics', 'Summit', 'Research']
+            },
+            'achievement3': {
+                title: '📝 Blockchain Research Publication',
+                meta: 'Research Paper Author',
+                content: `Authored research paper: "A Secure and Reliable Blockchain Framework for Cyber-Physical Medicine Supply Chains"
+
+Research Contribution:
+• Addresses critical security challenges in healthcare
+• Proposes blockchain-based solution for medicine supply chains
+• Focuses on preventing counterfeit drugs
+• Combines cybersecurity with healthcare technology
+• Demonstrates research capability and domain expertise
+
+Published work contributing to the intersection of security and healthcare.`,
+                tags: ['Research', 'Blockchain', 'Healthcare', 'Publication', 'Security']
+            }
+        };
+
+        // Type text animation
+        async function typeText(text, element, speed = 30) {
+            for (let char of text) {
+                element.textContent += char;
+                await new Promise(resolve => setTimeout(resolve, speed));
+            }
+        }
+
+        // Add line to terminal
+        function addLine(content, className = '') {
+            const line = document.createElement('div');
+            line.className = `terminal-line ${className}`;
+            line.innerHTML = content;
+            terminal.appendChild(line);
+            terminal.scrollTop = terminal.scrollHeight;
+            return line;
+        }
+
+        // Show welcome message
+        async function showWelcome() {
+            addLine('<span class="prompt">ansh@terminal:~$</span> <span class="command">./welcome.sh</span>');
+            await new Promise(resolve => setTimeout(resolve, 500));
+            
+            addLine('<div class="output">╔═══════════════════════════════════════════════════════╗</div>');
+            addLine('<div class="output">║             WELCOME TO THE TERMINAL                  ║</div>');
+            addLine('<div class="output">║             System Online | Ready                    ║</div>');
+            addLine('<div class="output">╚═══════════════════════════════════════════════════════╝</div>');
+            await new Promise(resolve => setTimeout(resolve, 300));
+            
+            addLine('<div class="output">Initializing file system <span class="loading-smiley">:)</span></div>');
+            await new Promise(resolve => setTimeout(resolve, 800));
+            addLine('<div class="output" style="color: var(--primary-white);">✓ File system loaded successfully</div>');
+            await new Promise(resolve => setTimeout(resolve, 400));
+            addLine('<div class="output">Type <span class="command">help</span> for available commands</div>');
+            await new Promise(resolve => setTimeout(resolve, 300));
+            
+            showPrompt();
+        }
+
+        // Show current directory contents
+        function ls() {
+            const dir = fileSystem[currentPath];
+            if (!dir || !dir.contents) {
+                addLine('<div class="error">Error: Directory not found</div>');
+                return;
+            }
+
+            addLine('<div class="output">Contents of ' + currentPath + ':</div>');
+            
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'terminal-line';
+            
+            for (let [name, item] of Object.entries(dir.contents)) {
+                if (item.type === 'directory') {
+                    const folder = document.createElement('span');
+                    folder.className = 'item folder';
+                    folder.textContent = '📁 ' + name;
+                    folder.onclick = () => navigateToFolder(name);
+                    contentDiv.appendChild(folder);
+                } else {
+                    const file = document.createElement('span');
+                    file.className = 'item file';
+                    file.textContent = '📄 ' + name;
+                    file.onclick = () => openFile(name);
+                    contentDiv.appendChild(file);
+                }
+            }
+            
+            terminal.appendChild(contentDiv);
+        }
+
+        // Navigate to folder
+        async function navigateToFolder(folderName) {
+            const line = addLine(`<span class="prompt">ansh@terminal:${currentPath}$</span> <span class="command"></span>`);
+            const commandSpan = line.querySelector('.command');
+            
+            await typeText(`cd ${folderName}`, commandSpan, 50);
+            await new Promise(resolve => setTimeout(resolve, 300));
+            
+            // Show loading animation
+            const loadingLine = addLine(`<div class="output">Loading directory <span class="loading-smiley">:)</span></div>`);
+            await new Promise(resolve => setTimeout(resolve, 600));
+            
+            // Remove loading line
+            loadingLine.remove();
+            
+            currentPath = currentPath + '/' + folderName;
+            addLine(`<div class="output" style="color: var(--primary-white);">✓ Changed directory to ${currentPath}</div>`);
+            
+            await new Promise(resolve => setTimeout(resolve, 300));
+            showPrompt();
+        }
+
+        // Navigate to folder (for typed commands - no animation)
+        async function navigateToFolderTyped(folderName) {
+            // Show loading animation
+            const loadingLine = addLine(`<div class="output">Loading directory <span class="loading-smiley">:)</span></div>`);
+            await new Promise(resolve => setTimeout(resolve, 600));
+            
+            // Remove loading line
+            loadingLine.remove();
+            
+            currentPath = currentPath + '/' + folderName;
+            addLine(`<div class="output" style="color: var(--primary-white);">✓ Changed directory to ${currentPath}</div>`);
+            
+            await new Promise(resolve => setTimeout(resolve, 300));
+            showPrompt();
+        }
+
+        // Open file (for typed commands - no animation)
+        async function openFileTyped(fileName) {
+            let dir = fileSystem[currentPath];
+            let file = dir.contents[fileName];
+            
+            // If file not found in current directory, check if it's about.txt and look in root
+            if ((!file || file.type !== 'file') && fileName === 'about.txt') {
+                const rootDir = fileSystem['~'];
+                file = rootDir.contents['about.txt'];
+                if (file && file.type === 'file') {
+                    addLine(`<div class="output" style="color: var(--light-gray);">Note: Reading from ~ directory</div>`);
+                }
+            }
+            
+            if (!file || file.type !== 'file') {
+                addLine('<div class="error">Error: File not found</div>');
+                showPrompt();
+                return;
+            }
+
+            // Show loading animation
+            const loadingLine = addLine(`<div class="output">Reading file <span class="loading-smiley">:)</span></div>`);
+            await new Promise(resolve => setTimeout(resolve, 600));
+            
+            // Remove loading line
+            loadingLine.remove();
+
+            const content = fileContents[file.content];
+            if (content) {
+                const fileDiv = document.createElement('div');
+                fileDiv.className = 'file-content';
+                fileDiv.innerHTML = `
+                    <h3>${content.title}</h3>
+                    <div class="meta">${content.meta}</div>
+                    <div>${content.content.replace(/\n/g, '<br>')}</div>
+                    <div class="tags">
+                        ${content.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                    </div>
+                `;
+                terminal.appendChild(fileDiv);
+            }
+            
+            await new Promise(resolve => setTimeout(resolve, 300));
+            showPrompt();
+        }
+
+        // Open file
+        async function openFile(fileName) {
+            const line = addLine(`<span class="prompt">ansh@terminal:${currentPath}$</span> <span class="command"></span>`);
+            const commandSpan = line.querySelector('.command');
+            
+            await typeText(`cat ${fileName}`, commandSpan, 50);
+            await new Promise(resolve => setTimeout(resolve, 300));
+            
+            let dir = fileSystem[currentPath];
+            let file = dir.contents[fileName];
+            
+            // If file not found in current directory, check if it's about.txt and look in root
+            if ((!file || file.type !== 'file') && fileName === 'about.txt') {
+                const rootDir = fileSystem['~'];
+                file = rootDir.contents['about.txt'];
+                if (file && file.type === 'file') {
+                    addLine(`<div class="output" style="color: var(--light-gray);">Note: Reading from ~ directory</div>`);
+                }
+            }
+            
+            if (!file || file.type !== 'file') {
+                addLine('<div class="error">Error: File not found</div>');
+                showPrompt();
+                return;
+            }
+
+            // Show loading animation
+            const loadingLine = addLine(`<div class="output">Reading file <span class="loading-smiley">:)</span></div>`);
+            await new Promise(resolve => setTimeout(resolve, 600));
+            
+            // Remove loading line
+            loadingLine.remove();
+
+            const content = fileContents[file.content];
+            if (content) {
+                const fileDiv = document.createElement('div');
+                fileDiv.className = 'file-content';
+                fileDiv.innerHTML = `
+                    <h3>${content.title}</h3>
+                    <div class="meta">${content.meta}</div>
+                    <div>${content.content.replace(/\n/g, '<br>')}</div>
+                    <div class="tags">
+                        ${content.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                    </div>
+                `;
+                terminal.appendChild(fileDiv);
+            }
+            
+            await new Promise(resolve => setTimeout(resolve, 300));
+            showPrompt();
+        }
+
+        // Go back
+        async function cdBack() {
+            if (currentPath === '~') {
+                addLine('<div class="error">Already at root directory</div>');
+                showPrompt();
+                return;
+            }
+
+            const parts = currentPath.split('/');
+            parts.pop();
+            currentPath = parts.join('/') || '~';
+            
+            addLine(`<div class="output" style="color: var(--primary-white);">Changed directory to ${currentPath}</div>`);
+            await new Promise(resolve => setTimeout(resolve, 400));
+            showPrompt();
+        }
+
+        // Show help
+        function showHelp() {
+            const helpDiv = document.createElement('div');
+            helpDiv.className = 'help-menu';
+            helpDiv.innerHTML = `
+                <div style="color: var(--primary-white); font-family: 'Orbitron', sans-serif; margin-bottom: 10px;">AVAILABLE COMMANDS:</div>
+                <div class="command-list">
+                    <div><span class="cmd">ls</span> - List files and folders in current directory</div>
+                    <div><span class="cmd">cd [folder]</span> - Change directory (e.g., cd projects)</div>
+                    <div><span class="cmd">cd ..</span> - Go back to previous directory</div>
+                    <div><span class="cmd">cat [file]</span> - Read file contents (e.g., cat about.txt)</div>
+                    <div><span class="cmd">clear</span> - Clear terminal screen</div>
+                    <div><span class="cmd">help</span> - Show this help menu</div>
+                    <div style="margin-top: 10px; color: var(--light-gray);">💡 You can type commands or click on folders/files</div>
+                    <div style="color: var(--light-gray);">💡 Press Tab for auto-completion</div>
+                </div>
+            `;
+            terminal.appendChild(helpDiv);
+        }
+
+        // Clear terminal
+        function clearTerminal() {
+            terminal.innerHTML = '';
+        }
+
+        // Show prompt with command input and clickable buttons
+        function showPrompt() {
+            const promptDiv = document.createElement('div');
+            promptDiv.className = 'terminal-line';
+            promptDiv.style.marginBottom = '10px';
+            
+            // First line: prompt + input
+            const inputLine = document.createElement('div');
+            inputLine.style.display = 'flex';
+            inputLine.style.alignItems = 'center';
+            inputLine.style.marginBottom = '8px';
+            inputLine.style.flexWrap = 'wrap';
+            
+            const promptText = document.createElement('span');
+            promptText.className = 'prompt';
+            promptText.textContent = `ansh@terminal:${currentPath}$ `;
+            inputLine.appendChild(promptText);
+            
+            // Create input field
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.className = 'command-input';
+            input.autocomplete = 'off';
+            input.autocorrect = 'off';
+            input.autocapitalize = 'off';
+            input.spellcheck = false;
+            input.placeholder = 'type command or click below...';
+            
+            // Handle command execution
+            input.addEventListener('keydown', async (e) => {
+                if (e.key === 'Enter') {
+                    const command = input.value.trim();
+                    if (command) {
+                        // Disable input
+                        input.disabled = true;
+                        
+                        // Remove the prompt div since executeCommand will add its own
+                        promptDiv.remove();
+                        
+                        // Execute the command
+                        await executeCommand(command);
+                    } else {
+                        // Just show new prompt
+                        promptDiv.remove();
+                        showPrompt();
+                    }
+                } else if (e.key === 'Tab') {
+                    e.preventDefault();
+                    // Basic tab completion for commands
+                    const value = input.value;
+                    const commands = ['ls', 'cd', 'cat', 'clear', 'help', 'cd ..'];
+                    const matches = commands.filter(cmd => cmd.startsWith(value));
+                    if (matches.length === 1) {
+                        input.value = matches[0];
+                    }
+                }
+            });
+            
+            inputLine.appendChild(input);
+            promptDiv.appendChild(inputLine);
+            
+            // Second line: clickable command buttons
+            const buttonsLine = document.createElement('div');
+            buttonsLine.className = 'command-buttons-container';
+            buttonsLine.style.display = 'flex';
+            buttonsLine.style.gap = '8px';
+            buttonsLine.style.flexWrap = 'wrap';
+            buttonsLine.style.marginLeft = '0px';
+            
+            const commands = ['ls', 'cd ..', 'clear', 'help'];
+            commands.forEach(cmd => {
+                const cmdSpan = document.createElement('span');
+                cmdSpan.className = 'item command-btn';
+                cmdSpan.textContent = cmd;
+                cmdSpan.style.fontSize = '12px';
+                cmdSpan.style.padding = '4px 8px';
+                cmdSpan.style.cursor = 'pointer';
+                cmdSpan.onclick = async () => {
+                    // Remove the prompt div
+                    promptDiv.remove();
+                    // Execute command
+                    await executeCommand(cmd);
+                };
+                buttonsLine.appendChild(cmdSpan);
+            });
+            
+            promptDiv.appendChild(buttonsLine);
+            terminal.appendChild(promptDiv);
+            terminal.scrollTop = terminal.scrollHeight;
+            
+            // Focus the input
+            input.focus();
+            
+            // Keep focus on input when terminal is clicked
+            const focusHandler = () => {
+                if (!input.disabled) {
+                    input.focus();
+                }
+            };
+            terminal.addEventListener('click', focusHandler, { once: true });
+        }
+
+        // Execute command
+        async function executeCommand(cmd) {
+            addLine(`<span class="prompt">ansh@terminal:${currentPath}$</span> <span class="command">${cmd}</span>`);
+            
+            await new Promise(resolve => setTimeout(resolve, 200));
+            
+            const trimmedCmd = cmd.trim();
+            const parts = trimmedCmd.split(' ');
+            const mainCmd = parts[0];
+            const args = parts.slice(1).join(' ');
+            
+            switch(mainCmd) {
+                case 'ls':
+                    ls();
+                    break;
+                case 'cd':
+                    if (args === '..') {
+                        await cdBack();
+                        return;
+                    } else if (args) {
+                        // Check if folder exists
+                        const dir = fileSystem[currentPath];
+                        if (dir && dir.contents && dir.contents[args] && dir.contents[args].type === 'directory') {
+                            await navigateToFolderTyped(args);
+                            return;
+                        } else {
+                            addLine(`<div class="error">cd: ${args}: No such directory</div>`);
+                        }
+                    } else {
+                        addLine(`<div class="error">cd: missing directory argument</div>`);
+                    }
+                    break;
+                case 'cat':
+                    if (args) {
+                        await openFileTyped(args);
+                        return;
+                    } else {
+                        addLine(`<div class="error">cat: missing file argument</div>`);
+                    }
+                    break;
+                case 'clear':
+                    clearTerminal();
+                    showPrompt();
+                    return;
+                case 'help':
+                    showHelp();
+                    break;
+                case '':
+                    // Empty command, just show new prompt
+                    break;
+                default:
+                    addLine(`<div class="error">Command not found: ${mainCmd}. Type 'help' for available commands.</div>`);
+            }
+            
+            await new Promise(resolve => setTimeout(resolve, 300));
+            showPrompt();
+        }
+
+        // Initialize
+        showWelcome();
+
+        // Entry screen functionality
+        const entryScreen = document.getElementById('entryScreen');
+        const startBtn = document.getElementById('startBtn');
+
+        // NEW: TYPEWRITER LOGIC
+        document.addEventListener('DOMContentLoaded', () => {
+            const titleText = "ANSH VERMA";
+            const titleElement = document.querySelector('.entry-title');
+            const subtitle = document.querySelector('.entry-subtitle');
+            
+            // Initial state
+            titleElement.textContent = "";
+            
+            let i = 0;
+            function typeWriter() {
+                if (i < titleText.length) {
+                    titleElement.textContent += titleText.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 150); // Speed of typing
+                } else {
+                    // Trigger fade ins after typing
+                    subtitle.style.opacity = "1";
+                    startBtn.classList.add('visible');
+                }
+            }
+            
+            // Start typing after a short delay
+            setTimeout(typeWriter, 500);
+        });
+
+        startBtn.addEventListener('click', () => {
+            entryScreen.classList.add('hidden');
+            // Focus the first input after entry
+            setTimeout(() => {
+                const firstInput = document.querySelector('.command-input');
+                if (firstInput) {
+                    firstInput.focus();
+                }
+            }, 600);
+        });
+
+        // Also allow Enter key to start
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !entryScreen.classList.contains('hidden') && startBtn.classList.contains('visible')) {
+                startBtn.click();
+            }
+        });
+
+        const RESUME_DOWNLOAD_LINK = 'YOUR_RESUME_LINK_HERE'; // <-- Paste your resume link here
+        
+        document.getElementById('resumeDownloadBtn').addEventListener('click', function(e) {
+            if (RESUME_DOWNLOAD_LINK === 'YOUR_RESUME_LINK_HERE') {
+                e.preventDefault();
+                alert('Resume download link not configured yet. Please update the RESUME_DOWNLOAD_LINK variable in the code.');
+            } else {
+                this.href = RESUME_DOWNLOAD_LINK;
+            }
+        });
+    </script>
+</body>
+</html>
