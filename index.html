@@ -949,7 +949,7 @@
                 <a href="mailto:anshmeet226@gmail.com" class="quick-link">📧 Email</a>
                 <a href="https://github.com/Diabos" class="quick-link" target="_blank">💻 GitHub</a>
                 <a href="https://www.linkedin.com/in/anshverma226/" class="quick-link" target="_blank">💼 LinkedIn</a>
-                <a href="#" id="resumeDownloadBtn" class="quick-link resume-download">📄 Resume</a>
+                <a href="https://raw.githubusercontent.com/Diabos/portfolio/main/Ansh%20RESUME.pdf" id="resumeDownloadBtn" class="quick-link resume-download">📄 Resume</a>
             </div>
         </div>
 
@@ -1776,10 +1776,10 @@ Published work contributing to the intersection of security and healthcare.`,
             }
         });
 
-        const RESUME_DOWNLOAD_LINK = 'blob:https://github.com/03e071fa-7c71-484a-a931-98d78641996a'; // <-- Paste your resume link here
+        const RESUME_DOWNLOAD_LINK = 'https://raw.githubusercontent.com/Diabos/portfolio/main/Ansh%20RESUME.pdf'; 
         
         document.getElementById('resumeDownloadBtn').addEventListener('click', function(e) {
-            if (RESUME_DOWNLOAD_LINK === 'blob:https://github.com/03e071fa-7c71-484a-a931-98d78641996') {
+            if (RESUME_DOWNLOAD_LINK === 'raw.githubusercontent.com') {
                 e.preventDefault();
                 alert('Resume download link not configured yet. Please update the RESUME_DOWNLOAD_LINK variable in the code.');
             } else {
@@ -1789,5 +1789,6 @@ Published work contributing to the intersection of security and healthcare.`,
     </script>
 </body>
 </html>
+
 
 
