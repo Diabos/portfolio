@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ansh Verma | Cybersecurity Portfolio</title>
     
-    <link rel="icon" type="image/gif" href="https://raw.githubusercontent.com/Diabos/portfolio/refs/heads/main/tenor.gif">
+    <link rel="icon" type="image/gif" href="https://media.tenor.com/FMTaWoHYgdkAAAAC/dedsec.gif">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -137,12 +137,12 @@
             font-family: 'Share Tech Mono', monospace;
         }
 
-        /* SKULL CORNER */
+        /* UPDATED SKULL CORNER CSS */
         .skull-corner {
             position: absolute;
             bottom: 20px;
             right: 20px;
-            width: 150px;
+            width: 150px; /* Adjusted size for the GIF */
             height: auto;
             opacity: 0.9;
             z-index: 10001;
@@ -152,6 +152,7 @@
             width: 100%;
             height: auto;
             display: block;
+            /* Keeps it strictly black and white. Remove 'filter' if you want color. */
             filter: grayscale(100%) contrast(1.2);
         }
 
@@ -270,7 +271,7 @@
         /* Left panel - Visual */
         .visual-panel {
             flex: 0 0 350px;
-            background: rgba(13, 13, 13, 0.95);
+            background: rgba(13, 13, 13, 0.9);
             border: 2px solid var(--primary-white);
             box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(10px);
@@ -281,58 +282,6 @@
             overflow-y: auto;
             overflow-x: hidden;
             -webkit-overflow-scrolling: touch;
-        }
-
-        /* --- NEW LOCKED MOBILE HEADER --- */
-        #mobile-header {
-            display: none; /* Hidden on desktop */
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 60px;
-            background: #000;
-            border-bottom: 1px solid #333;
-            z-index: 8000; /* Highest z-index to stay on top */
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 15px;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.8);
-        }
-
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        #mobile-header-img {
-            height: 40px; 
-            width: auto;
-            display: block;
-            filter: grayscale(100%) contrast(1.2);
-        }
-
-        #mobile-header-text {
-            font-family: 'Share Tech Mono', monospace;
-            color: #fff;
-            font-size: 16px;
-            font-weight: bold;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        #mobile-menu-btn {
-            background: #fff;
-            color: #000;
-            border: none;
-            padding: 8px 12px;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: bold;
-            font-size: 11px;
-            cursor: pointer;
-            text-transform: uppercase;
-            box-shadow: 0 0 10px rgba(255,255,255,0.3);
         }
 
         .avatar-container {
@@ -375,13 +324,27 @@
         }
 
         @keyframes glitchSkull {
-            0%, 90%, 100% { transform: translate(0); filter: brightness(1); }
-            92% { transform: translate(-2px, 2px); filter: brightness(1.3); }
-            94% { transform: translate(2px, -2px); filter: brightness(0.8); }
-            96% { transform: translate(-1px, -1px); filter: brightness(1.2); }
+            0%, 90%, 100% { 
+                transform: translate(0);
+                filter: brightness(1);
+            }
+            92% { 
+                transform: translate(-2px, 2px);
+                filter: brightness(1.3);
+            }
+            94% { 
+                transform: translate(2px, -2px);
+                filter: brightness(0.8);
+            }
+            96% { 
+                transform: translate(-1px, -1px);
+                filter: brightness(1.2);
+            }
         }
 
-        .profile-info { text-align: center; }
+        .profile-info {
+            text-align: center;
+        }
 
         .profile-info h1 {
             font-family: 'Orbitron', sans-serif;
@@ -427,7 +390,9 @@
             text-transform: uppercase;
         }
 
-        .quick-links { margin-top: 20px; }
+        .quick-links {
+            margin-top: 20px;
+        }
 
         .quick-link {
             display: block;
@@ -482,26 +447,24 @@
             align-items: center;
         }
 
+        @media (max-width: 640px) {
+            .terminal-header {
+                padding: 12px 15px;
+            }
+        }
+
         .terminal-title {
             font-family: 'Orbitron', sans-serif;
             color: var(--primary-white);
             font-size: 14px;
             text-transform: uppercase;
             letter-spacing: 2px;
-            /* Added for Desktop Branding */
+        }
+
+        .terminal-controls {
             display: flex;
-            align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
-
-        /* Desktop Header Branding Image */
-        .terminal-title img {
-            height: 20px;
-            width: auto;
-            filter: grayscale(100%) contrast(1.2);
-        }
-
-        .terminal-controls { display: flex; gap: 8px; }
 
         .terminal-btn {
             width: 12px;
@@ -524,29 +487,56 @@
             -webkit-overflow-scrolling: touch;
         }
 
-        .terminal-body::-webkit-scrollbar { width: 8px; }
-        .terminal-body::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.03); }
-        .terminal-body::-webkit-scrollbar-thumb { background: var(--mid-gray); box-shadow: 0 0 10px rgba(255, 255, 255, 0.3); }
-
-        .terminal-line { 
-            margin-bottom: 8px; 
-            animation: fadeIn 0.3s ease-in; 
-            display: flex; 
-            align-items: center; 
-            flex-wrap: wrap; 
+        .terminal-body::-webkit-scrollbar {
+            width: 8px;
         }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .terminal-body::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .terminal-body::-webkit-scrollbar-thumb {
+            background: var(--mid-gray);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        .terminal-line {
+            margin-bottom: 8px;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
 
         .prompt {
             color: var(--light-gray);
             margin-right: 10px;
         }
 
-        .command { color: var(--accent-white); }
-        
-        .terminal-line.output-line { display: block; }
-        .output { color: var(--light-gray); }
-        .error { color: #ff3333; }
+        .command {
+            color: var(--accent-white);
+        }
+
+        .output {
+            color: var(--light-gray);
+            margin-left: 20px;
+        }
+
+        .error {
+            color: #ff3333;
+            margin-left: 20px;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 8px;
+            height: 16px;
+            background: var(--primary-white);
+            margin-left: 5px;
+            animation: blink 1s infinite;
+        }
 
         /* Command input */
         .command-input {
@@ -556,18 +546,42 @@
             color: var(--accent-white);
             font-family: 'Share Tech Mono', monospace;
             font-size: 14px;
-            flex: 1; /* Take remaining space */
-            min-width: 100px;
+            width: 100%;
             caret-color: var(--primary-white);
         }
 
-        /* Loading animation */
+        .command-input::placeholder {
+            color: var(--mid-gray);
+            opacity: 0.5;
+        }
+
+        .command-input::selection {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Loading animation - blinking smiley */
         .loading-smiley {
             display: inline-block;
             margin-left: 5px;
             animation: blinkSmiley 0.8s infinite;
         }
-        @keyframes blinkSmiley { 0%, 49% { opacity: 1; } 50%, 99% { opacity: 0; } 100% { opacity: 1; } }
+
+        @keyframes blinkSmiley {
+            0%, 49% { 
+                opacity: 1;
+            }
+            50%, 99% { 
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
 
         /* Folder/File system */
         .item {
@@ -589,8 +603,42 @@
             transform: translateX(5px);
         }
 
-        .folder { color: var(--accent-white); border-color: var(--light-gray); background: rgba(255, 255, 255, 0.05); }
-        .file { color: var(--light-gray); border-color: var(--gray); background: rgba(255, 255, 255, 0.02); }
+        .folder {
+            color: var(--accent-white);
+            border-color: var(--light-gray);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .folder:hover {
+            background: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        }
+
+        .file {
+            color: var(--light-gray);
+            border-color: var(--gray);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .file:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--light-gray);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+        }
+
+        /* Touch-friendly for mobile */
+        @media (hover: none) {
+            .item {
+                padding: 12px 20px;
+                margin: 8px 0;
+            }
+
+            .folder, .file {
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+            }
+        }
 
         .file-content {
             margin: 20px;
@@ -599,7 +647,18 @@
             border: 1px solid var(--mid-gray);
             color: var(--light-gray);
             line-height: 1.8;
-            display: block; 
+        }
+
+        @media (max-width: 640px) {
+            .file-content {
+                margin: 15px 0;
+                padding: 15px;
+                font-size: 14px;
+            }
+
+            .file-content h3 {
+                font-size: 18px;
+            }
         }
 
         .file-content h3 {
@@ -610,9 +669,19 @@
             text-shadow: 0 0 10px var(--primary-white);
         }
 
-        .file-content .meta { color: var(--light-gray); font-size: 12px; margin-bottom: 15px; }
-        .file-content .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
-        
+        .file-content .meta {
+            color: var(--light-gray);
+            font-size: 12px;
+            margin-bottom: 15px;
+        }
+
+        .file-content .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
         .tag {
             padding: 4px 10px;
             background: rgba(255, 255, 255, 0.05);
@@ -623,97 +692,184 @@
         }
 
         /* Help menu */
-        .help-menu { margin: 20px; padding: 15px; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--mid-gray); display: block; }
-        .help-menu .command-list { margin-top: 10px; }
-        .help-menu .cmd { color: var(--accent-white); font-weight: bold; }
+        .help-menu {
+            margin: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--mid-gray);
+        }
+
+        .help-menu .command-list {
+            margin-top: 10px;
+        }
+
+        .help-menu .cmd {
+            color: var(--accent-white);
+            font-weight: bold;
+        }
 
         /* Mobile Responsive */
         @media (max-width: 968px) {
-            .container { flex-direction: column; padding: 10px; gap: 10px; height: 100vh; overflow: hidden; }
-            .visual-panel { flex: 0 0 auto; order: 2; padding: 20px; max-height: 40vh; }
-            .terminal-panel { order: 1; flex: 1; min-height: 0; }
-            .avatar-container { max-width: 180px; margin: 0 auto; font-size: 11px; line-height: 1.15; }
-            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
-            .stat-box { padding: 10px; }
+            .container {
+                flex-direction: column;
+                padding: 10px;
+                gap: 10px;
+                height: 100vh;
+                overflow: hidden;
+            }
+
+            .visual-panel {
+                flex: 0 0 auto;
+                order: 2;
+                padding: 20px;
+                max-height: 40vh;
+            }
+
+            .terminal-panel {
+                order: 1;
+                flex: 1;
+                min-height: 0;
+            }
+
+            .avatar-container {
+                max-width: 180px;
+                margin: 0 auto;
+                font-size: 11px;
+                line-height: 1.15;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+
+            .stat-box {
+                padding: 10px;
+            }
+
+            .profile-info h1 {
+                font-size: 22px;
+            }
+
+            .profile-info .title {
+                font-size: 12px;
+            }
+
+            .terminal-title {
+                font-size: 11px;
+            }
         }
 
         @media (max-width: 640px) {
+            body {
+                overflow: auto;
+                height: auto;
+                position: relative;
+            }
 
-    body {
-        overflow-y: auto;
-        height: auto;
-    }
+            .container {
+                height: auto;
+                min-height: 100vh;
+                overflow: visible;
+                padding: 0;
+            }
 
-    .visual-panel {
-        position: fixed;
-        top: 60px;
-        left: 0;
-        width: 100%;              /* full width for universal fit */
-        background: #000;
-        z-index: 999999;
+            .visual-panel {
+                display: none;
+            }
 
-        padding: 20px 0;
+            .terminal-panel {
+                min-height: 100vh;
+                height: auto;
+                border: none;
+            }
 
-        /* IMPORTANT: */
-        height: auto;             /* drawer grows with content */
-        max-height: none;         /* no clipping */
-        overflow: visible;        /* no scroll inside */
+            .terminal-header {
+                padding: 12px 15px;
+            }
 
-        transform: translateX(-100%);
-        transition: transform 0.3s ease;
-    }
+            .terminal-body {
+                font-size: 13px;
+                padding: 15px;
+                overflow-y: visible;
+                height: auto;
+            }
 
-    .visual-panel.show-mobile {
-        transform: translateX(0);
-    }
+            .item {
+                display: block;
+                margin: 8px 0;
+                padding: 12px;
+            }
 
-    .content-wrapper {
-        width: 100%;
-        padding: 0 20px;
-    }
-}
+            .file-content {
+                margin: 15px 0;
+                padding: 15px;
+                font-size: 13px;
+            }
 
-            /* LOCKED MOBILE HEADER */
-            #mobile-header { display: flex; }
-
-            .terminal-panel { min-height: 100vh; height: auto; border: none; }
-            .terminal-header { display: none; /* Hide default header, use locked one */ }
-            .terminal-body { font-size: 13px; padding: 15px; overflow-y: visible; height: auto; }
-            .item { display: block; margin: 8px 0; padding: 12px; }
-            
             /* Mobile prompt improvements */
-            .terminal-line { display: block; } 
-            
-            /* HIDE INPUT ON MOBILE TO PREVENT KEYBOARD */
-            .command-input { display: none; } 
-            
-            .prompt { display: block; margin-bottom: 8px; color: #fff; font-weight: bold; } 
+            .prompt {
+                font-size: 13px;
+                display: block;
+                margin-bottom: 8px;
+            }
+
+            .command-input {
+                font-size: 16px !important;
+                padding: 10px 0;
+                width: 100%;
+            }
+
+            .command-input::placeholder {
+                font-size: 13px;
+            }
 
             /* Better folder/file display on mobile */
-            .folder, .file { display: block !important; width: 100%; margin: 10px 0 !important; padding: 14px !important; font-size: 15px; text-align: center; }
+            .folder, .file {
+                display: block !important;
+                width: 100%;
+                margin: 10px 0 !important;
+                padding: 14px !important;
+                font-size: 15px;
+                text-align: center;
+            }
 
-            /* Stack command buttons */
-            .command-buttons-container { display: grid !important; grid-template-columns: 1fr 1fr; gap: 10px !important; margin-top: 12px !important; width: 100%; }
-            .command-btn { margin: 0 !important; padding: 14px 10px !important; font-size: 14px !important; text-align: center; min-height: 48px; display: flex !important; align-items: center; justify-content: center; }
+            /* Stack command buttons in a grid on mobile */
+            .command-buttons-container {
+                display: grid !important;
+                grid-template-columns: 1fr 1fr;
+                gap: 10px !important;
+                margin-top: 12px !important;
+                width: 100%;
+            }
+
+            /* Mobile-specific button styling */
+            .command-btn {
+                margin: 0 !important;
+                padding: 14px 10px !important;
+                font-size: 14px !important;
+                text-align: center;
+                min-height: 48px;
+                display: flex !important;
+                align-items: center;
+                justify-content: center;
+            }
         }
 
         /* Tablet landscape */
         @media (min-width: 641px) and (max-width: 968px) and (orientation: landscape) {
-            .visual-panel { display: flex; max-height: 50vh; }
-            .terminal-panel { flex: 1; }
+            .visual-panel {
+                display: flex;
+                max-height: 50vh;
+            }
+
+            .terminal-panel {
+                flex: 1;
+            }
         }
-        
     </style>
 </head>
 <body>
-    <div id="mobile-header">
-        <div class="header-left">
-            <img id="mobile-header-img" src="https://raw.githubusercontent.com/Diabos/portfolio/refs/heads/main/tenor.gif" alt="DedSec GIF">
-            <div id="mobile-header-text">ANSH@TERMINAL:~$</div>
-        </div>
-        <button id="mobile-menu-btn">[ SYSTEM DATA ]</button>
-    </div>
-
     <div class="entry-screen" id="entryScreen">
         
         <h1 class="entry-title"></h1>
@@ -727,7 +883,7 @@
         </div>
         
         <div class="skull-corner">
-            <img src="https://raw.githubusercontent.com/Diabos/portfolio/refs/heads/main/tenor.gif" alt="DedSec GIF">
+            <img src="https://c.tenor.com/y1pNuAHiHFcAAAAd/tenor.gif" alt="DedSec GIF">
         </div>
     </div>
 
@@ -743,9 +899,7 @@
     </div>
 
     <div class="container">
-        <div class="visual-panel" id="visualPanel">
-<div class="content-wrapper">
-            
+        <div class="visual-panel">
             <div class="avatar-container">
                 <div class="ascii-skull">⠀⠀⠀⠀⠀⣶⡆⠀⠀⠀⢀⣴⢦⠀⠀⠀⠀⣖⡶⠀⠀⠀⠀⡏⡧⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⢹⣷⡀⠀⠀⢀⣿⣧⡀⠀⠀⢠⣾⣧⠀⠀⠀⣠⣾⡇⠀⠀⠀⠀⠀
@@ -797,15 +951,11 @@
                 <a href="https://www.linkedin.com/in/anshverma226/" class="quick-link" target="_blank">💼 LinkedIn</a>
                 <a href="https://raw.githubusercontent.com/Diabos/portfolio/main/Ansh%20RESUME.pdf" id="resumeDownloadBtn" class="quick-link resume-download">📄 Resume</a>
             </div>
-</div>
         </div>
 
         <div class="terminal-panel">
             <div class="terminal-header">
-                <div class="terminal-title">
-                    <img src="https://raw.githubusercontent.com/Diabos/portfolio/refs/heads/main/tenor.gif" alt="DedSec">
-                    <span>ANSH@TERMINAL:~$</span>
-                </div>
+                <div class="terminal-title">ansh@terminal:~$</div>
                 <div class="terminal-controls">
                     <div class="terminal-btn close"></div>
                     <div class="terminal-btn minimize"></div>
@@ -822,7 +972,7 @@
         let currentPath = '~';
         let commandHistory = [];
 
-        // File system structure (SAME AS BEFORE)
+        // File system structure
         const fileSystem = {
             '~': {
                 type: 'directory',
@@ -1217,7 +1367,6 @@ Published work contributing to the intersection of security and healthcare.`,
             
             const contentDiv = document.createElement('div');
             contentDiv.className = 'terminal-line';
-            contentDiv.style.flexWrap = 'wrap';
             
             for (let [name, item] of Object.entries(dir.contents)) {
                 if (item.type === 'directory') {
@@ -1506,15 +1655,12 @@ Published work contributing to the intersection of security and healthcare.`,
             terminal.appendChild(promptDiv);
             terminal.scrollTop = terminal.scrollHeight;
             
-            // --- MOBILE OPTIMIZATION: Only auto-focus on Desktop ---
-            // If screen width is greater than 640px, auto-focus.
-            if (window.innerWidth > 640) {
-                input.focus();
-            }
+            // Focus the input
+            input.focus();
             
-            // Keep focus on input when terminal is clicked, BUT ONLY ON DESKTOP
+            // Keep focus on input when terminal is clicked
             const focusHandler = () => {
-                if (!input.disabled && window.innerWidth > 640) {
+                if (!input.disabled) {
                     input.focus();
                 }
             };
@@ -1614,10 +1760,10 @@ Published work contributing to the intersection of security and healthcare.`,
 
         startBtn.addEventListener('click', () => {
             entryScreen.classList.add('hidden');
-            // Focus the first input after entry -- ONLY ON DESKTOP
+            // Focus the first input after entry
             setTimeout(() => {
                 const firstInput = document.querySelector('.command-input');
-                if (firstInput && window.innerWidth > 640) {
+                if (firstInput) {
                     firstInput.focus();
                 }
             }, 600);
@@ -1628,14 +1774,6 @@ Published work contributing to the intersection of security and healthcare.`,
             if (e.key === 'Enter' && !entryScreen.classList.contains('hidden') && startBtn.classList.contains('visible')) {
                 startBtn.click();
             }
-        });
-
-        // --- MOBILE MENU LOGIC ---
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const visualPanel = document.getElementById('visualPanel');
-
-        mobileMenuBtn.addEventListener('click', () => {
-            visualPanel.classList.toggle('show-mobile');
         });
 
         const RESUME_DOWNLOAD_LINK = 'https://raw.githubusercontent.com/Diabos/portfolio/main/Ansh%20RESUME.pdf'; 
